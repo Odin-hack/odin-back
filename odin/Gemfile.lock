@@ -372,7 +372,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
-  google-ads-googleads (~> 33.1)
+  google-ads-googleads
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)
