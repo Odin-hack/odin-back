@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+
+  web:
+    build: ./odin
+    command: bash -c "bundle install && rails db:prepare && rails s -b 0.0.0.0 -p 3000"
+    volumes:
+      - ./odin:/app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: password
+      TREND_SERVICE_URL: http://trends:8001
+    depends_on:
+      - db
+      - trends
+
+  trends:
+    build: ./trends_service
+    command: uvicorn main:app --host 0.0.0.0 --port 8001
+    volumes:
+      - ./trends_service:/app
+    ports:
+      - "8001:8001"
+
+volumes:
+  postgres_data:
