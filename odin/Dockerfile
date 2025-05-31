@@ -7,11 +7,10 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs ya
 WORKDIR /app
 
 # Copy Gemfile and install gems
-COPY Gemfile ./
+COPY . .
 RUN gem install bundler && bundle install
 
 # Copy the full app
-COPY . .
 
 # Precompile assets if needed
 # RUN bundle exec rake assets:precompile
