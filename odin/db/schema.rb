@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_31_185207) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_31_230248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ad_groups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "campaign_id", null: false
+    t.integer "status"
+    t.bigint "cpc_bid_micros"
+    t.integer "ad_group_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_ad_groups_on_campaign_id"
+  end
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name", null: false
@@ -24,4 +35,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_31_185207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "ad_groups", "campaigns"
 end

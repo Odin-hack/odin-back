@@ -1,4 +1,4 @@
-class Api::CampaignController < ApplicationController
+class Api::CampaignsController < ApplicationController
   before_action :set_campaign, only: [ :show, :update ]
 
   def index
@@ -43,7 +43,10 @@ class Api::CampaignController < ApplicationController
       :end_date,
       :budget_amount,
       :status,
-      :advertising_channel_type
+      :advertising_channel_type,
+      ad_groups_attributes: [
+        :id, :name, :status, :cpc_bid_micros, :ad_group_type, :_destroy
+      ]
     )
   end
 end

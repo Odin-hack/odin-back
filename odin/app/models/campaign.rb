@@ -1,4 +1,8 @@
 class Campaign < ApplicationRecord
+  has_many :ad_groups, dependent: :destroy
+
+  accepts_nested_attributes_for :ad_groups, allow_destroy: true
+
   enum :status, [ :paused, :enabled, :removed ]
   enum :advertising_channel_type, [ :video, :search, :shopping, :local_services, :travel ]
 
