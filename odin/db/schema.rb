@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_01_031643) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_01_044934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_031643) do
     t.index ["campaign_id"], name: "index_ad_groups_on_campaign_id"
   end
 
+  create_table "ad_histories", force: :cascade do |t|
+    t.bigint "ad_id", null: false
+    t.string "field_changed"
+    t.string "old_value"
+    t.string "new_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_id"], name: "index_ad_histories_on_ad_id"
+  end
+
   create_table "ads", force: :cascade do |t|
     t.bigint "ad_group_id", null: false
     t.string "name"
@@ -65,6 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_031643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "countries"
+    t.datetime "last_evolved_at"
     t.index ["ad_group_id"], name: "index_ads_on_ad_group_id"
   end
 
@@ -96,6 +107,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_031643) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_groups", "campaigns"
+  add_foreign_key "ad_histories", "ads"
   add_foreign_key "ads", "ad_groups"
   add_foreign_key "campaigns", "users"
 end
