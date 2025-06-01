@@ -2,12 +2,12 @@ class Api::CampaignsController < ApplicationController
   before_action :set_campaign, only: [ :show, :update ]
 
   def index
-    campaigns = Campaign.all
-    render json: campaigns
+    campaigns = Campaign.includes(ad_groups: :ads).all
+    render json: campaigns, include: ['ad_groups', 'ad_groups.ads']
   end
 
   def show
-    render json: @campaign
+    render json: @campaign, include: ['ad_groups', 'ad_groups.ads']
   end
 
   def create
@@ -45,7 +45,21 @@ class Api::CampaignsController < ApplicationController
       :status,
       :advertising_channel_type,
       ad_groups_attributes: [
-        :id, :name, :status, :cpc_bid_micros, :ad_group_type, :_destroy
+        :name,
+        :status,
+        :cpc_bid_micros,
+        :ad_group_type,
+        ads_attributes: [
+          :name,
+          :status,
+          :ad_type,
+          :final_url,
+          :headline1,
+          :headline2,
+          :description,
+          :image,
+          :video
+        ]
       ]
     )
   end

@@ -44,6 +44,16 @@ class Api::AdGroupsController < ApplicationController
   end
 
   def ad_group_params
-    params.require(:ad_group).permit(:name, :status, :cpc_bid_micros, :ad_group_type)
+    params.require(:ad_group).permit(
+      :name,
+      :status,
+      :cpc_bid_micros,
+      :ad_group_type,
+      ads_attributes: [
+        :id, :name, :status, :ad_type, :final_url,
+        :headline1, :headline2, :description,
+        :image, :video, :_destroy
+      ])
   end
+
 end

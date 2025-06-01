@@ -1,5 +1,8 @@
 class AdGroup < ApplicationRecord
   belongs_to :campaign
+  has_many :ads, dependent: :destroy
+
+  accepts_nested_attributes_for :ads, allow_destroy: true
 
   enum :status, [ :enabled, :paused, :removed ]
   enum :ad_group_type, [ :search_standard, :display_standard ]
