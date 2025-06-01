@@ -12,7 +12,6 @@ services:
 
   web:
     build: ./odin
-    command: bash -c "bundle install && rails db:prepare && rails s -b 0.0.0.0 -p 3000"
     volumes:
       - ./odin:/app
     ports:

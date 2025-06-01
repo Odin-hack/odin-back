@@ -31,7 +31,7 @@ class Api::CampaignsController < ApplicationController
   private
 
   def set_campaign
-    @campaign = current_user.campaigns.find(params[:campaign_id])
+    @campaign = current_user.campaigns.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Campaign not found or access denied" }, status: :not_found
   end
