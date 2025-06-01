@@ -12,4 +12,5 @@ COPY . .
 
 RUN whenever --update-crontab
 
-CMD cron && rails s -b 0.0.0.0 -p 3000
+CMD service cron start && rails s -b 0.0.0.0 -p 3000
+

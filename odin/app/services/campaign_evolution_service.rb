@@ -7,6 +7,7 @@ class CampaignEvolutionService
   ]
 
   def self.call
+    Rails.logger.info "== CRON IS WORKING == #{Time.now}"
     Ad.includes(:ad_group).find_each do |ad|
       new(ad).evolve_if_needed
     end
