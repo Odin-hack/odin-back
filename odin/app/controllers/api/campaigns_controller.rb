@@ -3,11 +3,11 @@ class Api::CampaignsController < ApplicationController
 
   def index
     campaigns = Campaign.includes(ad_groups: :ads).all
-    render json: campaigns, include: ['ad_groups', 'ad_groups.ads']
+    render json: campaigns, include: [ "ad_groups", "ad_groups.ads" ]
   end
 
   def show
-    render json: @campaign, include: ['ad_groups', 'ad_groups.ads']
+    render json: @campaign, include: [ "ad_groups", "ad_groups.ads" ]
   end
 
   def create
@@ -57,7 +57,7 @@ class Api::CampaignsController < ApplicationController
           :headline1,
           :headline2,
           :description,
-          :image,
+          :image_data,
           :video
         ]
       ]

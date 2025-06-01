@@ -1,6 +1,6 @@
 class Api::AdsController < ApplicationController
   before_action :set_ad_group
-  before_action :set_ad, only: [:show, :update]
+  before_action :set_ad, only: [ :show, :update ]
 
   def index
     render json: @ad_group.ads
@@ -33,13 +33,13 @@ class Api::AdsController < ApplicationController
   def set_ad_group
     @ad_group = AdGroup.find(params[:ad_group_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Ad group not found' }, status: :not_found
+    render json: { error: "Ad group not found" }, status: :not_found
   end
 
   def set_ad
     @ad = @ad_group.ads.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Ad not found' }, status: :not_found
+    render json: { error: "Ad not found" }, status: :not_found
   end
 
   def ad_params
@@ -51,7 +51,7 @@ class Api::AdsController < ApplicationController
       :headline1,
       :headline2,
       :description,
-      :image,
+      :image_data,
       :video
     )
   end

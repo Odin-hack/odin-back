@@ -52,8 +52,7 @@ class Api::AdGroupsController < ApplicationController
       ads_attributes: [
         :id, :name, :status, :ad_type, :final_url,
         :headline1, :headline2, :description,
-        :image, :video, :_destroy
+        :image_data, :video, :_destroy
       ])
   end
-
 end
