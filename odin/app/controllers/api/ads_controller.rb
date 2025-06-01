@@ -58,7 +58,8 @@ class Api::AdsController < ApplicationController
       :headline2,
       :description,
       :image_data,
-      :video
+      :video,
+      countries: []
     )
   end
 end

@@ -4,12 +4,16 @@ class Ad < ApplicationRecord
   has_one_attached :image
   has_one_attached :video
 
+  serialize :countries, coder: JSON
+
   enum status: { paused: 0, enabled: 1, removed: 2 }
   enum ad_type: { text: 0, image: 1, video: 2 }
 
   validates :name, :status, :ad_type, :final_url, presence: true
 
   validates :headline1, :headline2, presence: true, if: -> { ad_type == "text" }
+
+  validates :countries, presence: true
 
   def image_data=(base64)
     return if base64.blank?

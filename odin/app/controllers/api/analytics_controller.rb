@@ -18,9 +18,9 @@ class Api::AnalyticsController < ApplicationController
   end
 
   def empty_campaigns
-		campaigns = Campaign.includes(ad_groups: :ads).select do |campaign|
-			campaign.ad_groups.none? || campaign.ad_groups.all? { |group| group.ads.none? }
-		end
-		render json: campaigns, each_serializer: CampaignSerializer
-	end
+    campaigns = Campaign.includes(ad_groups: :ads).select do |campaign|
+      campaign.ad_groups.none? || campaign.ad_groups.all? { |group| group.ads.none? }
+    end
+    render json: campaigns, each_serializer: CampaignSerializer
+  end
 end

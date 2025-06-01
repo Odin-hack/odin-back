@@ -58,7 +58,8 @@ class Api::CampaignsController < ApplicationController
           :headline2,
           :description,
           :image_data,
-          :video
+          :video,
+          countries: []
         ]
       ]
     )

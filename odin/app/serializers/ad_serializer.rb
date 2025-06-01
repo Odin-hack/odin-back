@@ -1,5 +1,5 @@
 class AdSerializer < ActiveModel::Serializer
-  attributes :id, :name, :status, :ad_type, :final_url, :headline1, :headline2, :description
+  attributes :id, :name, :status, :ad_type, :final_url, :headline1, :headline2, :description, :countries
 
   include Rails.application.routes.url_helpers
 
