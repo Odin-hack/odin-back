@@ -11,7 +11,7 @@ class Api::CampaignsController < ApplicationController
   end
 
   def create
-    result = Campaign::CreateService.call(campaign_params)
+    result = Campaign::CreateService.call(campaign_params.merge(user: current_user))
 
     if result.success?
       render json: result.payload, status: :created

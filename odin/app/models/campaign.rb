@@ -1,4 +1,5 @@
 class Campaign < ApplicationRecord
+  belongs_to :user
   has_many :ad_groups, inverse_of: :campaign, dependent: :destroy
 
   accepts_nested_attributes_for :ad_groups, allow_destroy: true

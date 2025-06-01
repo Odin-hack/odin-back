@@ -32,10 +32,11 @@ class Api::AdGroupsController < ApplicationController
   private
 
   def set_campaign
-    @campaign = Campaign.find(params[:campaign_id])
+    @campaign = current_user.campaigns.find(params[:campaign_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "Campaign not found" }, status: :not_found
+    render json: { error: "Campaign not found or access denied" }, status: :not_found
   end
+
 
   def set_ad_group
     @ad_group = @campaign.ad_groups.find(params[:id])
