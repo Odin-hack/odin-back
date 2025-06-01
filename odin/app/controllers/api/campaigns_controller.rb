@@ -2,7 +2,7 @@ class Api::CampaignsController < ApplicationController
   before_action :set_campaign, only: [ :show, :update ]
 
   def index
-    campaigns = Campaign.includes(ad_groups: :ads).all
+    campaigns = current_user.campaigns.includes(ad_groups: :ads).all
     render json: campaigns, include: [ "ad_groups", "ad_groups.ads" ]
   end
 
@@ -31,9 +31,9 @@ class Api::CampaignsController < ApplicationController
   private
 
   def set_campaign
-    @campaign = Campaign.find(params[:id])
+    @campaign = current_user.campaigns.find(params[:campaign_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "Campaign not found" }, status: :not_found
+    render json: { error: "Campaign not found or access denied" }, status: :not_found
   end
 
   def campaign_params
